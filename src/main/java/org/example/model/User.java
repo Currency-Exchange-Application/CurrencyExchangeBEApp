@@ -1,6 +1,5 @@
 package org.example.model;
 
-// User class representing user details
 public class User {
     private String email;
     private String password;

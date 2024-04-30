@@ -1,7 +1,6 @@
 package org.example.model;
 
-// Concrete class representing a specific currency
-class USD extends Currency {
+public class USD extends Currency {
     public USD() {
         super("USD");
     }

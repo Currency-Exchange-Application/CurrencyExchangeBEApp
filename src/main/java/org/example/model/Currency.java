@@ -1,6 +1,5 @@
 package org.example.model;
 
-// Abstract class representing a generic currency
 public abstract class Currency {
     private String code;
 
@@ -11,6 +10,6 @@ public abstract class Currency {
     public String getCode() {
         return code;
     }
-    // Abstract method to get symbol for the currency
+
     public abstract String getSymbol();
 }
