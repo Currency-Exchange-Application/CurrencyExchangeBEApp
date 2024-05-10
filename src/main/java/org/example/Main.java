@@ -1,25 +1,22 @@
 package org.example;
 
 import org.example.model.User;
-import org.example.service.CurrencyExchangeService;
-import org.example.service.SimpleCurrencyExchange;
+import org.example.repository.UserRepository;
+import org.example.service.CurrencyExchangeServiceImpl;
 import org.example.service.UserService;
 
 import java.util.Scanner;
 
 public class Main {
     private static UserService userService;
-    private static CurrencyExchangeService currencyExchangeService;
+    private static UserRepository userRepository = new UserRepository();
+    private static CurrencyExchangeServiceImpl currencyExchangeServiceImpl;
     private static Scanner scanner;
 
     public static void main(String[] args) {
-        SimpleCurrencyExchange exchange = new SimpleCurrencyExchange();
-        exchange.setExchangeRate("USD", 1.0);
-        exchange.setExchangeRate("EUR", 0.85);
-        exchange.setExchangeRate("GBP", 0.75);
 
         userService = new UserService();
-        currencyExchangeService = new CurrencyExchangeService(exchange);
+        currencyExchangeServiceImpl = new CurrencyExchangeServiceImpl();
         scanner = new Scanner(System.in);
 
         menu();
@@ -41,7 +38,7 @@ public class Main {
                 case ADMIN:
                     adminActions();
                     break;
-                case REGULAR_USER:
+                case USER:
                     userActions();
                     break;
             }
@@ -53,7 +50,7 @@ public class Main {
         String email = scanner.nextLine();
         System.out.print("Password: ");
         String password = scanner.nextLine();
-        return userService.authenticateUser(email, password);
+        return userService.loginUser(email, password);
     }
 
     public static void adminActions() {

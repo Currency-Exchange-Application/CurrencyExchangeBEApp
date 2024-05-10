@@ -1,8 +1,8 @@
 package org.example.model;
 
 public class GBP extends Currency {
-    public GBP() {
-        super("GBP");
+    public GBP(double rate) {
+        super("GBP", rate);
     }
 
     @Override

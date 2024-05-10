@@ -1,26 +1,27 @@
 package org.example.service;
 
-import org.example.dao.UserDao;
 import org.example.model.User;
 import org.example.model.UserType;
+import org.example.repository.UserRepository;
 
 public class UserService {
 
-    private UserDao users;
+    private UserRepository userRepository = new UserRepository();
 
-    public UserService() {
-
+    public User parseUserFromString(String s) {
+        String[] userDetails = s.split(" ");
+        return new User(userDetails[1], userDetails[3], UserType.valueOf(userDetails[5]));
     }
 
-    public User authenticateUser(String email, String password) {
-        User user = users.findUserByEmail(email);
+    public User loginUser(String email, String password) {
+        User user = userRepository.loadUser(email);
         if (user != null && user.getPassword().equals(password)) {
             return user;
         }
         return null;
     }
 
-    public boolean createUser(String email, String password, String userType) {
-        return users.addUser(new User(email, password, UserType.valueOf(userType)));
+    public boolean registerUser(String email, String password, String userType) {
+        return userRepository.saveUser(new User(email, password, UserType.valueOf(userType)));
     }
 }
